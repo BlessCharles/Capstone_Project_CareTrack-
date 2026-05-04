@@ -1,12 +1,16 @@
-================================================================================
+--------------------------------------------------------------------------------
 CARETRACK+: POST-DISCHARGE PATIENT RECOVERY MANAGEMENT
+
 README / DOCUMENTATION
-================================================================================
+--------------------------------------------------------------------------------
+
 Author      : Bless Charles Oppong
+
 Institution : Ashesi University
+
 Major       : Management Information Systems
+
 Year        : 2026
-================================================================================
  
  
 --------------------------------------------------------------------------------
@@ -67,27 +71,17 @@ All items should show a green checkmark before proceeding.
 --------------------------------------------------------------------------------
 4. FIREBASE CONFIGURATION (IMPORTANT)
 --------------------------------------------------------------------------------
- 
+
 CareTrack+ uses Firebase for authentication, database, and push notifications.
-The Firebase configuration file (google-services.json) has been excluded from
-the repository for security reasons, as it contains sensitive project credentials.
- 
-To run the application from source, you will need to set up your own Firebase
-project by following these steps:
- 
-    1. Go to https://console.firebase.google.com/
-    2. Create a new Firebase project
-    3. Register an Android application using the package name:
-           com.example.caretrack_plus
-    4. Download the generated google-services.json file
-    5. Place the file in the following directory inside the project:
-           android/app/google-services.json
-    6. In the Firebase console, enable the following services:
-           - Authentication (Phone Number sign-in method)
-           - Cloud Firestore
-           - Firebase Cloud Messaging (FCM)
- 
-Without this configuration file, the app will not build or run correctly.
+The Firebase configuration file (google-services.json) is already included in
+the repository at:
+
+    android/app/google-services.json
+
+No additional Firebase setup is required. Once you clone the repository and
+run flutter pub get, the app will automatically connect to the existing
+Firebase backend. All services (Phone Authentication, Cloud Firestore, and
+Firebase Cloud Messaging) are already configured and live.
  
  
 --------------------------------------------------------------------------------
@@ -98,11 +92,8 @@ OPTION A: Run on a Physical Android Device (Recommended)
  
     1. Clone the repository (see Section 1)
     2. Open the project folder in Visual Studio Code or Android Studio
-    3. Add the google-services.json file (see Section 4)
-    4. Connect your Android phone to your computer via USB, or connect
-       wirelessly over the same Wi-Fi network using Android Studio's
-       wireless debugging feature
-    5. Open a terminal in the project root directory and run:
+    3. Connect your Android phone to your computer via USB, or connect wirelessly over the same Wi-Fi network using Android Studio's wireless debugging feature
+    4. Open a terminal in the project root directory and run:
  
            flutter pub get
  
@@ -112,8 +103,7 @@ OPTION A: Run on a Physical Android Device (Recommended)
  
            flutter run
  
-       Or, in Android Studio, select your connected device from the device
-       dropdown and click the Run button.
+       Or, in Android Studio, select your connected device from the device dropdown and click the Run button.
  
     7. The app will compile and appear on your device automatically.
  
@@ -132,7 +122,7 @@ device or Firebase test phone numbers configured in the Firebase console.
 For testing purposes, the following test credentials were used during
 development and can be configured in your Firebase project:
  
-    Test phone number : +233 000 000 000
+    Test phone number : +233 553 573 155
     Test OTP code     : 123456
  
 These must be added manually under Authentication > Sign-in method >
@@ -151,17 +141,20 @@ The source code is organized as follows:
     │   ├── enter_phone_screen.dart      Phone number input and OTP request
     │   ├── verify_otp_screen.dart       OTP verification and user registration
     │   ├── dashboard_screen.dart        Main patient dashboard
-    │   ├── add_medication_screen.dart   Add/edit medication form
-    │   ├── add_appointment_screen.dart  Add/edit appointment form
+    │   ├── add_medication_screen.dart   Add medication form
+    │   ├── add_appointment_screen.dart  Add appointment form
     │   ├── add_instruction_screen.dart  Add discharge instruction form
+    |   ├── add_new_screen.dart          Access point to access the add medication, appointment, and instruction buttons 
     │   ├── medication_detail_screen.dart Medication detail and adherence view
+    |   ├── edit_appointment_screen.dart  Edit the appointment information 
     │   ├── expired_screen.dart          Expired medications and appointments
     │   ├── profile_screen.dart          User profile
+    |   ├── notification_service.dart    Handles the notifications/alerts the patients receives to remind them about their medications
     │   └── second_eye_screen.dart       Caregiver (Second_Eye) management
     │
     ├── android/
     │   └── app/
-    │       └── google-services.json     ← ADD THIS FILE (see Section 4)
+    │       └── google-services.json     
     │
     ├── pubspec.yaml                     Flutter dependencies
     └── README.txt                       This file
@@ -190,12 +183,9 @@ All dependencies are installed automatically when you run:
 8. USER MANUAL
 --------------------------------------------------------------------------------
  
-A full user manual is included in this documentation folder as:
+A full user manual is included in the appendix of the pdf document in the zip file
  
-    UserManual.pdf
- 
-It covers account registration, adding medications, scheduling appointments,
-logging discharge instructions, and using the Second_Eye feature. Please refer
+It covers account registration, adding medications, scheduling appointments, logging discharge instructions, and using the Second_Eye feature. Please refer
 to it for step-by-step guidance on using the application.
  
  
@@ -203,22 +193,14 @@ to it for step-by-step guidance on using the application.
 9. ADDITIONAL NOTES
 --------------------------------------------------------------------------------
  
-    - The application was developed and tested on Android only. iOS support
-      is planned for a future version.
+    - The application was developed and tested on Android only. iOS support is planned for a future version.
  
-    - The application supports basic offline functionality. Medication
-      reminders stored locally will still trigger without an internet
+    - The application supports basic offline functionality. Medication reminders stored locally will still trigger without an internet
       connection, but data sync and caregiver alerts require connectivity.
  
-    - Firebase Cloud Functions were used to detect missed medication doses
-      and trigger caregiver alerts. These functions are deployed separately
-      to Firebase and are not included in the local source code. Details on
-      redeploying them can be found in the repository under:
-          /functions/index.js
+    - Firebase Cloud Functions were used to detect missed medication doses and trigger caregiver alerts. These functions are deployed separately
+      to Firebase and are not included in the local source code.
  
     - For any questions regarding the source code or setup, please contact:
           bless.oppong@ashesi.edu.gh
- 
-================================================================================
-END OF README
-================================================================================
+
